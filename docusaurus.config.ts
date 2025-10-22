@@ -5,13 +5,28 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
-  favicon: "img/favicon.ico",
+  title: "Torqbit",
+  tagline: "Unified Customer support and education platform",
+  favicon: "https://cdn.torqbit.com/static/favicon.ico",
+  plugins: [
+    function tailwindPlugin(context, options) {
+      return {
+        name: "tailwind-postcss-plugin",
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins = [
+            require("postcss-import"),
+            require("@tailwindcss/postcss"),
+            require("autoprefixer"),
+          ];
+          return postcssOptions;
+        },
+      };
+    },
+  ],
+
   scripts: [
     {
       src: "https://torqbit-dev.b-cdn.net/static/js/chat-embed.local.js",
-
       defer: true,
       "data-agentId": "cmdzme4da000opdcsx1nq5fgi",
       "data-position": "bottom-right",
@@ -79,22 +94,15 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "My Site",
+      title: "Torqbit",
       logo: {
         alt: "My Site Logo",
-        src: "img/logo.svg",
+        src: "https://cdn.torqbit.com/static/brand/brand-icon.png",
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "Tutorial",
-        },
-        { to: "/blog", label: "Blog", position: "left" },
-        {
-          href: "https://github.com/facebook/docusaurus",
-          label: "GitHub",
+          href: "/",
+          label: "Get Started",
           position: "right",
         },
       ],
@@ -142,7 +150,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Torqbit, Inc. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
